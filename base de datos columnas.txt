@@ -1,0 +1,513 @@
+create table palabra_clave
+(
+id	SERIAL PRIMARY KEY,
+nombre varchar (50) NOT NULL
+);
+
+create table familia_olfativa
+(
+id	SERIAL PRIMARY KEY,
+nombre varchar (50) NOT NULL,
+descripcion varchar (50) 
+);
+
+create table pais
+(
+id SERIAL PRIMARY KEY,
+nombre varchar(50) NOT NULL
+);
+
+create table asociacion_nacional
+(
+id SERIAL PRIMARY KEY,
+id_pais integer NOT NULL,
+nombre varchar(100) NOT NULL,
+iniciales varchar(10) NOT NULL,
+region varchar(20) NOT NULL,
+CONSTRAINT fk_pais foreign key (id_pais) references pais (id)
+	
+);
+
+create table productor
+(
+id SERIAL PRIMARY KEY,
+nombre varchar(50) NOT NULL,
+pagina_web varchar(50) NOT NULL,
+id_asociacion integer,
+calle_avenida varchar(100),
+codigo_postal varchar(20),
+
+CONSTRAINT fk_asociacion foreign key (id_asociacion) references asociacion_nacional (id)
+);
+
+
+
+create table perfume
+(
+id	SERIAL PRIMARY KEY,
+id_productor integer NOT NULL,
+tipo varchar (2) NOT NULL,
+nombre varchar (50) NOT NULL,
+genero varchar (2) NOT NULL,
+recomendacion varchar(50) NOT NULL,
+
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id),
+CONSTRAINT genero_check CHECK (genero in ('F', 'M','U'))
+);
+
+create table intensidad_aromatica
+(
+id SERIAL,
+id_perfume	integer NOT NULL,
+tipo varchar (50) NOT NULL,
+iniciales varchar (5) NOT NULL,
+concentracion varchar (50),
+descripcion varchar (50),
+
+CONSTRAINT pk_intensidad PRIMARY KEY (id, id_perfume),
+CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id) ON DELETE CASCADE,
+CONSTRAINT tipo_intensidad CHECK (tipo in ( 'EdC' ,'EdS', 'EdT', 'EdP', 'P'))
+);
+
+
+
+create table presentacion_perfume
+(
+id	SERIAL,
+cantidad integer NOT NULL,
+volumen integer NOT NULL,
+fk_id_perfume integer NOT NULL,
+fk_id_intensidad integer NOT NULL,
+
+CONSTRAINT pk_presentacion_perfume PRIMARY KEY (id, fk_id_perfume, fk_id_intensidad),
+CONSTRAINT fk_intensidad foreign key (fk_id_perfume, fk_id_intensidad) references intensidad_aromatica (id, id_perfume) ON DELETE CASCADE
+
+);
+
+create table perfumista
+(
+id	SERIAL PRIMARY KEY,
+id_pais integer NOT NULL,
+nombre_primero varchar(50) NOT NULL,
+nombre_segundo varchar(50) ,
+apellido_primero varchar(50) NOT NULL,
+apellido_segundo varchar(50),
+genero varchar(2) NOT NULL,
+
+CONSTRAINT fk_pais_contraint foreign key (id_pais) references pais (id),
+CONSTRAINT genero_check CHECK (genero in ('M', 'F')) 
+);
+
+create table esencia_perfume
+(
+tsca_cas	SERIAL PRIMARY KEY,
+nombre varchar(50) NOT NULL,
+tipo varchar(15) NOT NULL,
+descripcion varchar(50) 
+
+);
+
+create table proveedor
+(
+id SERIAL PRIMARY KEY,
+nombre varchar(50) NOT NULL,
+pagina_web varchar(100) NOT NULL,
+correo_electronico varchar(100),
+calle_avenida varchar(100),
+codigo_postal varchar(20),
+id_pais integer NOT NULL,
+id_asociacion integer,
+
+CONSTRAINT fk_asociacion foreign key (id_asociacion) references asociacion_nacional (id),
+CONSTRAINT fk_pais foreign key (id_pais) references pais (id)
+
+);
+
+create table otros_ingredientes
+(
+id	SERIAL PRIMARY KEY,
+id_proveedor	integer NOT NULL,
+nombre varchar(50) NOT NULL,
+formula_quimica varchar(50) NOT NULL,
+ipc varchar(30),
+tsca_cas varchar(30),
+	
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id)
+);
+
+
+create table materia_esencia
+(
+id	SERIAL PRIMARY KEY,
+id_proveedor integer NOT NULL,
+estado varchar(15) NOT NULL,
+punto_ebullicion integer NOT NULL,
+ipc varchar(30) NOT NULL,
+ipc_alter varchar(30),	
+einecs varchar(30)NOT NULL,	
+tsca_cas varchar(30) NOT NULL,
+descripcion_visual varchar(100)NOT NULL,	
+nombre varchar(100)NOT NULL,	
+parte varchar(100)NOT NULL,
+naturaleza varchar(30)NOT NULL,	
+tipo varchar(50)NOT NULL,
+solubilidad varchar(50)NOT NULL,
+proceso varchar(150)NOT NULL,	
+descproceso varchar(150),
+
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id)
+
+
+);
+
+create table presentacion_ingrediente
+(
+pc	SERIAL PRIMARY KEY,
+precio float NOT NULL,
+volumen_ml integer NOT NULL,
+id_materia integer,
+id_otros_ingredientes integer,
+	
+CONSTRAINT fk_materia foreign key (id_materia) references materia_esencia (id),
+CONSTRAINT fk_otros_ingredientes foreign key (id_otros_ingredientes) references otros_ingredientes (id)
+);
+
+
+create table prohibido
+(
+tsca_cas integer PRIMARY KEY,
+nombre varchar(150) NOT NULL
+
+);
+
+
+create table evaluacion
+(
+fecha date,
+id_productor integer NOT NULL,
+id_proveedor integer NOT NULL,
+puntuacion_final integer NOT NULL,
+tipo varchar(20) NOT NULL,
+
+CONSTRAINT pk_evaluacion PRIMARY KEY (fecha, id_productor, id_proveedor),
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE,
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE
+
+);
+
+
+create table miembro_ifra
+(
+id SERIAL PRIMARY KEY,
+fecha_inicial date NOT NULL,
+tipo varchar(25) NOT NULL,
+fecha_final date,
+id_productor integer,
+id_proveedor integer,
+
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE,
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE,
+CONSTRAINT fk_tipo_miembro CHECK (tipo in ('Principal', 'Secundario','Asociación Nacional')) 
+);
+
+create table contacto
+(
+codigo SERIAL PRIMARY KEY,
+numero_telefono bigint NOT NULL,
+id_productor integer,
+id_proveedor integer,
+
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE,
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE
+
+);
+
+
+create table variable
+(
+id	SERIAL PRIMARY KEY,
+nombre varchar (50) NOT NULL,
+etiqueta varchar (15) NOT NULL,
+descripcion varchar (50)
+
+
+);
+
+create table variable_formula
+(
+fecha_inicial date,
+id_variable integer NOT NULL,
+id_productor integer NOT NULL,
+peso integer NOT NULL,
+tipo_formula varchar(20) NOT NULL,
+fecha_final date,
+
+CONSTRAINT pk_variable_formula PRIMARY KEY (fecha_inicial, id_variable, id_productor),
+CONSTRAINT fk_variable foreign key (id_variable) references variable (id) ON DELETE CASCADE,
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE,
+CONSTRAINT tipo_formula_check CHECK (tipo_formula in ('Inicial', 'Anual'))
+);
+
+create table formula_escala
+(
+fecha_inicial date,
+id_productor integer NOT NULL,
+escala_inicial integer NOT NULL,
+escala_final integer NOT NULL,
+fecha_final date,
+
+CONSTRAINT pk_formula_escala PRIMARY KEY (fecha_inicial, id_productor),
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE
+);
+
+create table contrato
+(
+id_contrato SERIAL not null,
+fecha_inicial date NOT NULL,
+descuento integer,
+exclusividad bool,
+fecha_final date,
+motivo_cancelacion varchar(50),
+id_productor integer NOT NULL,
+id_proveedor integer NOT NULL,
+
+CONSTRAINT pk_contrato PRIMARY key (id_contrato, id_productor, id_proveedor),
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id) ON DELETE CASCADE,
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE
+);
+
+create table forma_pago
+(
+id SERIAL NOT NULL,
+id_proveedor integer NOT NULL,
+nombre varchar(50) NOT NULL,
+tipo varchar(50) NOT NULL,
+plazo_dias integer NOT NULL,
+descripcion varchar(50) NOT NULL,
+cuotas integer,
+porcentaje_cuotas integer,
+
+CONSTRAINT pk_forma_pago PRIMARY KEY (id, id_proveedor),
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE
+);
+
+create table renovacion
+(
+id SERIAL,
+id_contrato integer NOT NULL,
+id_productor integer NOT NULL, 
+id_proveedor integer NOT NULL,
+fecha date NOT NULL,
+
+CONSTRAINT pk_renovacion PRIMARY KEY (id, id_productor, id_proveedor, id_contrato),
+CONSTRAINT fk_contrato foreign key (id_contrato, id_proveedor, id_productor) references contrato (id_contrato, id_proveedor, id_productor) ON DELETE CASCADE
+);
+
+create table forma_envio
+(
+id SERIAL,
+id_proveedor integer NOT NULL,
+id_pais integer NOT NULL,
+transporte varchar(50) NOT NULL,
+coste integer NOT NULL,
+extras varchar(50),
+
+CONSTRAINT pk_forma_envio PRIMARY KEY (id, id_proveedor, id_pais),
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id) ON DELETE CASCADE,
+CONSTRAINT fk_pais foreign key (id_pais) references pais (id) ON DELETE CASCADE
+
+);
+
+create table p_f (
+    id_palabra int not null,
+    id_familia int not null,
+
+    CONSTRAINT pk_p_f PRIMARY KEY (id_palabra, id_familia),
+    CONSTRAINT fk_palabra foreign key (id_palabra) references palabra_clave (id) ON DELETE CASCADE,
+    CONSTRAINT fk_familia foreign key (id_familia) references familia_olfativa (id) ON DELETE CASCADE
+);
+
+create table f_p (
+    id_perfume int not null,
+    id_familia int not null,
+
+    CONSTRAINT pk_f_p PRIMARY KEY (id_perfume, id_familia),
+    CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id) ON DELETE CASCADE,
+    CONSTRAINT fk_familia foreign key (id_familia) references familia_olfativa (id) ON DELETE CASCADE
+);
+
+create table f_m (
+    id_materia int not null,
+    id_familia int not null,
+
+    CONSTRAINT pk_f_m PRIMARY KEY (id_materia, id_familia),
+    CONSTRAINT fk_materia foreign key (id_materia) references materia_esencia (id) ON DELETE CASCADE,
+    CONSTRAINT fk_familia foreign key (id_familia) references familia_olfativa (id) ON DELETE CASCADE
+);
+
+create table origen (
+    id_materia int not null,
+    id_pais int not null,
+
+    CONSTRAINT pk_origen PRIMARY KEY (id_materia, id_pais),
+    CONSTRAINT fk_materia foreign key (id_materia) references materia_esencia (id) ON DELETE CASCADE,
+    CONSTRAINT fk_pais foreign key (id_pais) references pais (id) ON DELETE CASCADE
+);
+
+create table monolitica(
+    id_perfume int not null,
+    id_esencia int not null,
+
+    CONSTRAINT pk_monolitica PRIMARY KEY (id_perfume, id_esencia),
+    CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id) ON DELETE CASCADE,
+    CONSTRAINT fk_esencia foreign key (id_esencia) references esencia_perfume (tsca_cas) ON DELETE CASCADE
+);
+
+create table p_p(
+    id_perfume int not null,
+    id_perfumista int not null,
+
+    CONSTRAINT pk_p_p PRIMARY KEY (id_perfume, id_perfumista),
+    CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id)  ON DELETE CASCADE,
+    CONSTRAINT fk_perfumista foreign key (id_perfumista) references perfumista (id) ON DELETE CASCADE
+);
+
+create table nota(
+    id_perfume int not null,
+    id_esencia int not null,
+	tipo varchar(30) NOT NULL,
+	
+    CONSTRAINT pk_nota PRIMARY KEY (id_perfume, id_esencia),
+    CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id)  ON DELETE CASCADE,
+    CONSTRAINT fk_esencia foreign key (id_esencia) references esencia_perfume (tsca_cas) ON DELETE CASCADE
+);
+
+create table otros_componentes(
+    id_perfume int not null,
+    id_otros_ingredientes int not null,
+
+	CONSTRAINT pk_o_c PRIMARY KEY (id_perfume, id_otros_ingredientes),
+    CONSTRAINT fk_perfume foreign key (id_perfume) references perfume (id)  ON DELETE CASCADE,
+    CONSTRAINT fk_otros_ingredientes foreign key (id_otros_ingredientes) references otros_ingredientes (id) ON DELETE CASCADE
+);
+
+create table otros_materia(
+    id_materia_esencia int not null,
+    id_otros_ingredientes int not null,
+	
+    CONSTRAINT pk_o_m PRIMARY KEY (id_materia_esencia, id_otros_ingredientes),
+    CONSTRAINT fk_materia_esencia foreign key (id_materia_esencia) references materia_esencia (id)  ON DELETE CASCADE,
+    CONSTRAINT fk_otros_ingredientes foreign key (id_otros_ingredientes) references otros_ingredientes (id) ON DELETE CASCADE
+);
+
+create table f_e (
+    id_esencia_perfume int not null,
+    id_familia int not null,
+
+    CONSTRAINT pk_f_e PRIMARY KEY (id_esencia_perfume, id_familia),
+    CONSTRAINT fk_esencia_perfume foreign key (id_esencia_perfume) references esencia_perfume (tsca_cas)  ON DELETE CASCADE,
+    CONSTRAINT fk_familia foreign key (id_familia) references familia_olfativa (id) ON DELETE CASCADE
+);
+
+create table contrato_ingrediente (
+    id_contrato int not null,
+    id_presentacion_ingrediente int not null,
+    id_proveedor integer not null,
+    id_productor integer not null,
+
+    CONSTRAINT pk_c_i PRIMARY KEY (id_contrato, id_proveedor, id_productor,id_presentacion_ingrediente),
+    CONSTRAINT fk_contrato foreign key (id_contrato, id_proveedor, id_productor) references contrato (id_contrato, id_proveedor, id_productor)  ON DELETE CASCADE,
+    CONSTRAINT fk_presentacion_ingrediente foreign key (id_presentacion_ingrediente) references presentacion_ingrediente (pc)
+);
+
+create table productor_pais (
+
+id_pais integer not null,
+id_productor integer not null,
+
+CONSTRAINT pk_productor_pais PRIMARY KEY (id_pais, id_productor),
+CONSTRAINT fk_pais foreign key (id_pais) references pais (id) ON DELETE CASCADE,
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id)  ON DELETE CASCADE
+);
+
+
+create table condicion_contrato (
+	id serial,
+	--id contrato
+   id_contrato integer not null,
+   id_contrato_productor integer not null,
+   id_contrato_proveedor integer not null,
+	
+	-- id forma pago
+   id_forma_pago integer,
+   id_proveedor_pago integer,
+	
+	--id forma envio
+   id_forma_envio integer,
+   id_pais_envio integer,
+   id_proveedor_envio integer,
+
+	--id contrato
+   CONSTRAINT pk_condicion_contrato PRIMARY KEY (id, id_contrato, id_contrato_productor, id_contrato_proveedor),
+
+   CONSTRAINT fk_contrato foreign key (id_contrato, id_contrato_productor, id_contrato_proveedor) references contrato (id_contrato, id_productor, id_proveedor) ON DELETE CASCADE,
+   CONSTRAINT fk_forma_pago foreign key (id_forma_pago, id_proveedor_pago) references forma_pago (id, id_proveedor) ON DELETE CASCADE,
+   CONSTRAINT fk_forma_envio foreign key (id_forma_envio, id_proveedor_envio, id_pais_envio) references forma_envio (id, id_proveedor, id_pais) ON DELETE CASCADE
+ 
+);
+
+create table pedido
+(
+id SERIAL,
+fecha date NOT NULL,
+estatus varchar(50) NOT NULL,
+fecha_confirmacion date,
+numero_factura integer,
+monto_total integer, 
+
+--fk productor
+id_productor integer NOT NULL,
+--fk proveedor
+id_proveedor integer NOT NULL,
+	
+--pk condicion
+id_condicion_pago integer,
+id_condicion_envio integer,
+id_contrato integer,
+id_contrato_proveedor integer,
+id_contrato_productor integer,
+	
+
+CONSTRAINT pk_pedido primary key (id),
+
+CONSTRAINT fk_condicion_forma_pago foreign key (id_condicion_pago, id_contrato, id_contrato_proveedor, id_contrato_productor) references condicion_contrato (id, id_contrato, id_contrato_proveedor, id_contrato_productor),
+CONSTRAINT fk_condicion_forma_envio foreign key (id_condicion_envio, id_contrato, id_contrato_proveedor, id_contrato_productor) references condicion_contrato (id, id_contrato, id_contrato_proveedor, id_contrato_productor),
+		
+CONSTRAINT fk_proveedor foreign key (id_proveedor) references proveedor (id),
+CONSTRAINT fk_productor foreign key (id_productor) references productor (id)
+
+);
+
+create table pago
+(
+id SERIAL PRIMARY KEY,
+id_pedido integer NOT NULL,
+fecha date NOT NULL,
+monto integer,
+	
+CONSTRAINT fk_pedido foreign key (id_pedido) references pedido (id) ON DELETE CASCADE
+);
+
+
+create table detalle_pedido
+(
+id SERIAL PRIMARY KEY,
+id_pedido integer NOT NULL,
+id_presentacion integer NOT NULL,
+cantidad integer,
+	
+CONSTRAINT fk_pedido foreign key (id_pedido) references pedido (id) ON DELETE CASCADE,
+CONSTRAINT fk_presentacion foreign key (id_presentacion) references presentacion_ingrediente (pc) ON DELETE CASCADE
+);
+
+

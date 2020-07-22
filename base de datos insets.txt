@@ -1,0 +1,689 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.1
+-- Dumped by pg_dump version 12.1
+
+-- Started on 2020-07-11 01:22:06
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- TOC entry 3203 (class 0 OID 65191)
+-- Dependencies: 207
+-- Data for Name: pais; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.pais VALUES (1, 'Japon');
+INSERT INTO public.pais VALUES (2, 'Estados Unidos');
+INSERT INTO public.pais VALUES (3, 'India');
+INSERT INTO public.pais VALUES (4, 'Grecia');
+INSERT INTO public.pais VALUES (5, 'Mexico');
+INSERT INTO public.pais VALUES (6, 'España');
+INSERT INTO public.pais VALUES (14, 'Nueva Zelanda');
+INSERT INTO public.pais VALUES (15, 'Chile');
+INSERT INTO public.pais VALUES (16, 'Suecia');
+INSERT INTO public.pais VALUES (17, 'Singapur');
+INSERT INTO public.pais VALUES (18, 'Suiza');
+INSERT INTO public.pais VALUES (19, 'Colombia');
+
+
+
+--
+-- TOC entry 3205 (class 0 OID 65199)
+-- Dependencies: 209
+-- Data for Name: asociacion_nacional; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.asociacion_nacional VALUES (1, 14, 'Flavour & Fragrance Association of Australia & New Zealand', 'FFAAN', 'Asia-Pacific');
+INSERT INTO public.asociacion_nacional VALUES (2, 2, 'Fragrance Creators Association', 'FCA', 'North America');
+INSERT INTO public.asociacion_nacional VALUES (3, 1, 'Japan Flavor & Fragrance Materials Association', 'JFFMA', 'Asia-Pacific');
+INSERT INTO public.asociacion_nacional VALUES (4, 15, 'Asociación Chilena de Sabores y Fragancias Asociación', 'ACHISAF', 'Latin America');
+INSERT INTO public.asociacion_nacional VALUES (5, 16, 'Swiss Flavour and Fragrance Industry Association', 'SFFIA', 'South Africa');
+
+
+--
+-- TOC entry 3244 (class 0 OID 65510)
+-- Dependencies: 248
+-- Data for Name: condicion_contrato; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+--
+-- TOC entry 3207 (class 0 OID 65212)
+-- Dependencies: 211
+-- Data for Name: productor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.productor VALUES (4, 'Estée Lauder Companies', 'http://www.elcompanies.com/', 2, '767 5th Avenue New York, NY', '10153');
+INSERT INTO public.productor VALUES (5, 'Aromex', 'http://aromex.mx/', 4, 'Av. Real Agustín San Pedro Garza García, N.L', '66260');
+INSERT INTO public.productor VALUES (7, 'Oriental Aromatics Ltd', 'http://www.orientalaromatics.com/', NULL, '133 Jehangir Building, 2nd Floor, Mahatma Gandhi Road, Fort, Mumbai', '400001');
+INSERT INTO public.productor VALUES (8, 'VIORYL S.A.', 'http://www.vioryl.gr', NULL, '28th km National Road Athens - Lamia, Afidnes', '19014');
+
+--
+-- TOC entry 3219 (class 0 OID 65288)
+-- Dependencies: 223
+-- Data for Name: proveedor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.proveedor VALUES (2, 'Firmenich S.A.', 'https://www.firmenich.com/', 'contact@firmenich.com', 'Plaza Europa, 41, 15th Floor Torre Realia', '08908', 6, NULL);
+INSERT INTO public.proveedor VALUES (3, 'Vigon International, Inc.', 'https://www.vigon.com', NULL, '127 Airport Road East Stroudsburg, PA', '18301', 2, 1);
+INSERT INTO public.proveedor VALUES (4, 'Taytonn PTE Ltd.', 'http://www.taytonn.com/', 'info@taytonn.com', '18 Boon Lay Way, #07-140 Tradehub 21,', '609966', 17, 3);
+INSERT INTO public.proveedor VALUES (5, 'Essencia, Aetherische Oele AG', 'https://essencia.ch/', 'info@essencia.com', 'Stäffelistrasse 8', '8409', 18, 5);
+INSERT INTO public.proveedor VALUES (6, 'BASF', 'https://www.basf.com/', 'info@basf.com', 'Bogota', '202023', 19, NULL);
+
+--
+-- TOC entry 3201 (class 0 OID 65183)
+-- Dependencies: 205
+-- Data for Name: familia_olfativa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.familia_olfativa VALUES (1, 'verde', 'casi se puede ver la hierba recién cortada');
+INSERT INTO public.familia_olfativa VALUES (2, 'citrico', 'suelen ser adecuados como fragancias unisex');
+INSERT INTO public.familia_olfativa VALUES (3, 'flores', 'fragancias femeninas contienen notas florales');
+INSERT INTO public.familia_olfativa VALUES (4, 'frutas', 'se han hecho muy populares en los últimos años');
+INSERT INTO public.familia_olfativa VALUES (5, 'aromáticos', 'se centran en las hierbas aromáticas');
+INSERT INTO public.familia_olfativa VALUES (6, 'orientales', 'incluye fragancias masculinas y femeninas');
+INSERT INTO public.familia_olfativa VALUES (7, 'otros', 'Aromas combinados');
+INSERT INTO public.familia_olfativa VALUES (8, 'maderas', 'suelen incluir también notas cítricas');
+
+--
+-- TOC entry 3233 (class 0 OID 65407)
+-- Dependencies: 237
+-- Data for Name: contacto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.contacto VALUES (1, 2125724200, 4, NULL);
+INSERT INTO public.contacto VALUES (81, 15555123, 5, NULL);
+INSERT INTO public.contacto VALUES (91, 2266556000, 7, NULL);
+INSERT INTO public.contacto VALUES (30, 2295045100, 8, NULL);
+INSERT INTO public.contacto VALUES (34, 934905808, NULL, 2);
+INSERT INTO public.contacto VALUES (15, 704766300, NULL, 3);
+INSERT INTO public.contacto VALUES (65, 68618113, NULL, 4);
+INSERT INTO public.contacto VALUES (41, 522450560, NULL, 5);
+INSERT INTO public.contacto VALUES (57, 16322260, NULL, 6);
+
+--
+-- TOC entry 3199 (class 0 OID 65175)
+-- Dependencies: 203
+-- Data for Name: palabra_clave; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.palabra_clave VALUES (1, 'rosa');
+INSERT INTO public.palabra_clave VALUES (2, 'hierba');
+INSERT INTO public.palabra_clave VALUES (3, 'naranjas');
+INSERT INTO public.palabra_clave VALUES (4, 'mango');
+INSERT INTO public.palabra_clave VALUES (5, 'lavanda');
+INSERT INTO public.palabra_clave VALUES (6, 'vainilla');
+INSERT INTO public.palabra_clave VALUES (7, 'chocolate');
+INSERT INTO public.palabra_clave VALUES (8, 'cafe');
+INSERT INTO public.palabra_clave VALUES (9, 'sándalo');
+
+--
+-- TOC entry 3239 (class 0 OID 65459)
+-- Dependencies: 243
+-- Data for Name: contrato; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3261 (class 0 OID 65739)
+-- Dependencies: 265
+-- Data for Name: contrato_ingrediente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3250 (class 0 OID 65573)
+-- Dependencies: 254
+-- Data for Name: detalle_pedido; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3217 (class 0 OID 65280)
+-- Dependencies: 221
+-- Data for Name: esencia_perfume; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3229 (class 0 OID 65371)
+-- Dependencies: 233
+-- Data for Name: evaluacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3260 (class 0 OID 65724)
+-- Dependencies: 264
+-- Data for Name: f_e; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3253 (class 0 OID 65619)
+-- Dependencies: 257
+-- Data for Name: f_m; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3252 (class 0 OID 65604)
+-- Dependencies: 256
+-- Data for Name: f_p; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 3243 (class 0 OID 65492)
+-- Dependencies: 247
+-- Data for Name: forma_envio; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.forma_envio VALUES (1, 6, 19, 'Terrestre', 200, 'Seguro, Calidad');
+INSERT INTO public.forma_envio VALUES (2, 6, 19, 'Aereo', 750, 'Rapidez, Confianza, Seguridad');
+INSERT INTO public.forma_envio VALUES (3, 6, 19, 'Maritimo', 150, NULL);
+INSERT INTO public.forma_envio VALUES (4, 2, 6, 'Aereo', 600, 'Rapidez, Calidad');
+INSERT INTO public.forma_envio VALUES (5, 2, 6, 'Terrestre', 300, 'Rapidez');
+INSERT INTO public.forma_envio VALUES (6, 2, 6, 'Terrestre', 600, NULL);
+INSERT INTO public.forma_envio VALUES (7, 3, 2, 'Maritimo', 250, 'Express, Seguridad');
+INSERT INTO public.forma_envio VALUES (8, 3, 2, 'Aereo', 600, 'Rapidez');
+INSERT INTO public.forma_envio VALUES (9, 3, 2, 'Maritimo', 100, NULL);
+INSERT INTO public.forma_envio VALUES (10, 3, 2, 'Terrestre', 50, 'Rapido');
+INSERT INTO public.forma_envio VALUES (11, 4, 17, 'Aereo', 700, 'Express, Super Rapido');
+INSERT INTO public.forma_envio VALUES (12, 4, 17, 'Aereo', 500, 'Seguro');
+INSERT INTO public.forma_envio VALUES (13, 4, 17, 'Aereo', 520, 'Rastreo Tiempo Real');
+
+--
+-- TOC entry 3228 (class 0 OID 65358)
+-- Dependencies: 232
+-- Data for Name: forma_pago; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.forma_pago VALUES (1, 2, 'Efectivo', 'De Contado', 1, 'El Pago se tiene que realizar al instante', 0, 0);
+INSERT INTO public.forma_pago VALUES (2, 2, 'Financiado', 'Cuotas', 90, 'El pago tiene diversas cuotas a realizar', 3, 5);
+INSERT INTO public.forma_pago VALUES (3, 2, 'Financiado', 'Cuotas', 120, 'El pago se debe de ralizar el en tiempo', 6, 10);
+INSERT INTO public.forma_pago VALUES (4, 3, 'Efectivo', 'De Contado', 1, 'El pago se debe de realizar al momento', 0, 0);
+INSERT INTO public.forma_pago VALUES (5, 3, 'Cheque', 'De Contado', 1, 'El pago debe ser por cheque y al momento', 0, 2);
+INSERT INTO public.forma_pago VALUES (6, 3, 'Financiado', 'Cuotas', 100, 'El pago tiene ciertas cuotas a cumplir', 5, 7);
+INSERT INTO public.forma_pago VALUES (7, 3, 'Efectivo', 'De Contado', 1, 'El pago se debe realizar al momento', 0, 0);
+INSERT INTO public.forma_pago VALUES (8, 4, 'Efectivo', 'De Contado', 1, 'El pago se realizara al momento', 0, 0);
+INSERT INTO public.forma_pago VALUES (9, 4, 'Cheque', 'De Contado', 1, 'El pago se realizara al momento', 0, 0);
+INSERT INTO public.forma_pago VALUES (10, 4, 'Financiado', 'De Contado', 30, 'El pago tiene un plazo', 3, 2);
+INSERT INTO public.forma_pago VALUES (11, 5, 'Efectivo', 'De Contado', 1, 'El pago se realizara al momento', 0, 0);
+INSERT INTO public.forma_pago VALUES (12, 6, 'Financiado', 'Cuotas', 60, 'El pago se debe de realizar en un plazo', 5, 3);
+INSERT INTO public.forma_pago VALUES (13, 6, 'Financiado', 'Cuotas', 150, 'El pago debe realizarse en un plazo', 5, 5);
+
+--
+-- TOC entry 3237 (class 0 OID 65447)
+-- Dependencies: 241
+-- Data for Name: formula_escala; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.formula_escala VALUES ('2020-11-07', 4, 2, 7, NULL);
+
+
+--
+-- TOC entry 3211 (class 0 OID 65239)
+-- Dependencies: 215
+-- Data for Name: intensidad_aromatica; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3223 (class 0 OID 65319)
+-- Dependencies: 227
+-- Data for Name: materia_esencia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3231 (class 0 OID 65388)
+-- Dependencies: 235
+-- Data for Name: miembro_ifra; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.miembro_ifra VALUES (4, '2020-09-07', 'Principal', NULL, 4, NULL);
+INSERT INTO public.miembro_ifra VALUES (5, '2020-09-07', 'Principal', NULL, 5, NULL);
+INSERT INTO public.miembro_ifra VALUES (6, '2020-09-07', 'Secundario', NULL, 7, NULL);
+INSERT INTO public.miembro_ifra VALUES (7, '2020-09-07', 'Secundario', NULL, 8, NULL);
+INSERT INTO public.miembro_ifra VALUES (9, '2020-11-07', 'Principal', NULL, NULL, 2);
+INSERT INTO public.miembro_ifra VALUES (10, '2020-11-07', 'Principal', NULL, NULL, 3);
+INSERT INTO public.miembro_ifra VALUES (11, '2020-11-07', 'Principal', NULL, NULL, 4);
+INSERT INTO public.miembro_ifra VALUES (12, '2020-11-07', 'Principal', NULL, NULL, 5);
+INSERT INTO public.miembro_ifra VALUES (13, '2020-11-07', 'Principal', NULL, NULL, 6);
+
+
+--
+-- TOC entry 3255 (class 0 OID 65649)
+-- Dependencies: 259
+-- Data for Name: monolitica; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3257 (class 0 OID 65679)
+-- Dependencies: 261
+-- Data for Name: nota; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3254 (class 0 OID 65634)
+-- Dependencies: 258
+-- Data for Name: origen; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3258 (class 0 OID 65694)
+-- Dependencies: 262
+-- Data for Name: otros_componentes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3221 (class 0 OID 65306)
+-- Dependencies: 225
+-- Data for Name: otros_ingredientes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.otros_ingredientes VALUES (3, 6, 'DIPROPYLENE GLYCOL CARE', 'Dipropylene Glycol', '150-33-5', '30175-43-0');
+INSERT INTO public.otros_ingredientes VALUES (4, 6, 'N-PROPANOL PUREST', 'Propyl alcohol', '158-57-8', '30035-12-9');
+INSERT INTO public.otros_ingredientes VALUES (2, 6, '1,2-PROPYLENE GLYCOL CARE', '1,2-propanediol', '120-30-5', '30061-79-0');
+
+
+--
+-- TOC entry 3259 (class 0 OID 65709)
+-- Dependencies: 263
+-- Data for Name: otros_materia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3251 (class 0 OID 65589)
+-- Dependencies: 255
+-- Data for Name: p_f; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.p_f VALUES (2, 1);
+INSERT INTO public.p_f VALUES (3, 2);
+INSERT INTO public.p_f VALUES (1, 3);
+INSERT INTO public.p_f VALUES (4, 4);
+INSERT INTO public.p_f VALUES (5, 5);
+INSERT INTO public.p_f VALUES (6, 6);
+INSERT INTO public.p_f VALUES (7, 7);
+INSERT INTO public.p_f VALUES (8, 7);
+INSERT INTO public.p_f VALUES (9, 8);
+
+--
+-- TOC entry 3256 (class 0 OID 65664)
+-- Dependencies: 260
+-- Data for Name: p_p; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3248 (class 0 OID 65560)
+-- Dependencies: 252
+-- Data for Name: pago; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+
+--
+-- TOC entry 3246 (class 0 OID 65532)
+-- Dependencies: 250
+-- Data for Name: pedido; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3209 (class 0 OID 65225)
+-- Dependencies: 213
+-- Data for Name: perfume; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3215 (class 0 OID 65266)
+-- Dependencies: 219
+-- Data for Name: perfumista; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3225 (class 0 OID 65335)
+-- Dependencies: 229
+-- Data for Name: presentacion_ingrediente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.presentacion_ingrediente VALUES (2, 100, 500, NULL, 3);
+INSERT INTO public.presentacion_ingrediente VALUES (3, 160, 1000, NULL, 3);
+INSERT INTO public.presentacion_ingrediente VALUES (4, 1000, 10000, NULL, 3);
+INSERT INTO public.presentacion_ingrediente VALUES (5, 70, 500, NULL, 4);
+INSERT INTO public.presentacion_ingrediente VALUES (6, 120, 1000, NULL, 4);
+INSERT INTO public.presentacion_ingrediente VALUES (7, 50, 500, NULL, 2);
+INSERT INTO public.presentacion_ingrediente VALUES (8, 150, 1200, NULL, 2);
+
+--
+-- TOC entry 3213 (class 0 OID 65253)
+-- Dependencies: 217
+-- Data for Name: presentacion_perfume; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+
+--
+-- TOC entry 3262 (class 0 OID 65754)
+-- Dependencies: 266
+-- Data for Name: productor_pais; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.productor_pais VALUES (2, 4);
+INSERT INTO public.productor_pais VALUES (5, 5);
+INSERT INTO public.productor_pais VALUES (15, 5);
+INSERT INTO public.productor_pais VALUES (3, 7);
+INSERT INTO public.productor_pais VALUES (4, 8);
+
+
+--
+-- TOC entry 3226 (class 0 OID 65351)
+-- Dependencies: 230
+-- Data for Name: prohibido; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+INSERT INTO public.prohibido VALUES (622628, 'Hydroquinone monoethyl ether');
+INSERT INTO public.prohibido VALUES (62265990, 'Musk KS');
+INSERT INTO public.prohibido VALUES (623154, 'Furfurylidene acetone');
+INSERT INTO public.prohibido VALUES (623438, 'Methyl crotonate');
+
+
+--
+-- TOC entry 3241 (class 0 OID 65479)
+-- Dependencies: 245
+-- Data for Name: renovacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3235 (class 0 OID 65425)
+-- Dependencies: 239
+-- Data for Name: variable; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.variable VALUES (1, 'Criterio Pago', 'CP', 'Criterio de Pago');
+INSERT INTO public.variable VALUES (2, 'Criterio Envio', 'CE', 'Criterio de Envio');
+INSERT INTO public.variable VALUES (3, 'Criterio Localizacion', 'CL', 'Criterio Localizacion');
+INSERT INTO public.variable VALUES (4, 'Criterio Final', 'CF', NULL);
+INSERT INTO public.variable VALUES (7, 'Criterio de Compromiso', 'CC', 'Criterio de comprompinos');
+INSERT INTO public.variable VALUES (8, 'Criterio Final', 'CF', NULL);
+
+
+--
+-- TOC entry 3236 (class 0 OID 65431)
+-- Dependencies: 240
+-- Data for Name: variable_formula; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 1, 4, 2, 'Inicial', NULL);
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 2, 4, 3, 'Inicial', NULL);
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 3, 4, 2, 'Inicial', NULL);
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 4, 4, 4, 'Inicial', NULL);
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 7, 4, 7, 'Inicial', NULL);
+INSERT INTO public.variable_formula VALUES ('2020-11-07', 8, 4, 4, 'Anual', NULL);
+
+
+--
+-- TOC entry 3292 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: asociacion_nacional_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.asociacion_nacional_id_seq', 5, true);
+
+
+--
+-- TOC entry 3293 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: contacto_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contacto_codigo_seq', 9, false);
+
+
+--
+-- TOC entry 3294 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: contrato_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contrato_id_contrato_seq', 1, false);
+
+
+--
+-- TOC entry 3295 (class 0 OID 0)
+-- Dependencies: 253
+-- Name: detalle_pedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.detalle_pedido_id_seq', 1, false);
+
+
+--
+-- TOC entry 3296 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: esencia_perfume_tsca_cas_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.esencia_perfume_tsca_cas_seq', 1, false);
+
+
+--
+-- TOC entry 3297 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: familia_olfativa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.familia_olfativa_id_seq', 8, true);
+
+
+--
+-- TOC entry 3298 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: forma_envio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.forma_envio_id_seq', 13, true);
+
+
+--
+-- TOC entry 2993 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: forma_pago_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.forma_pago_id_seq', 13, true);
+
+--
+-- TOC entry 3300 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: intensidad_aromatica_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.intensidad_aromatica_id_seq', 1, false);
+
+
+--
+-- TOC entry 3301 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: materia_esencia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.materia_esencia_id_seq', 1, false);
+
+
+--
+-- TOC entry 3302 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: miembro_ifra_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.miembro_ifra_id_seq', 13, true);
+
+
+--
+-- TOC entry 3303 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: otros_ingredientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.otros_ingredientes_id_seq', 4, true);
+
+
+--
+-- TOC entry 3304 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: pago_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pago_id_seq', 1, false);
+
+
+--
+-- TOC entry 3305 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: pais_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pais_id_seq', 19, true);
+
+
+--
+-- TOC entry 3306 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: palabra_clave_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.palabra_clave_id_seq', 9, true);
+
+
+--
+-- TOC entry 3307 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: pedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pedido_id_seq', 1, false);
+
+
+--
+-- TOC entry 3308 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: perfume_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.perfume_id_seq', 1, false);
+
+
+--
+-- TOC entry 3309 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: perfumista_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.perfumista_id_seq', 1, false);
+
+
+--
+-- TOC entry 3310 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: presentacion_ingrediente_pc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.presentacion_ingrediente_pc_seq', 8, true);
+
+
+--
+-- TOC entry 3311 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: presentacion_perfume_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.presentacion_perfume_id_seq', 1, false);
+
+
+--
+-- TOC entry 3312 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: productor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.productor_id_seq', 9, false);
+
+
+--
+-- TOC entry 3313 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: proveedor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.proveedor_id_seq', 6, true);
+
+
+--
+-- TOC entry 3314 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: renovacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.renovacion_id_seq', 1, false);
+
+
+--
+-- TOC entry 3315 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: variable_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.variable_id_seq', 8, true);
+
+
+-- Completed on 2020-07-11 01:22:07
+
+--
+-- PostgreSQL database dump complete
+--
+

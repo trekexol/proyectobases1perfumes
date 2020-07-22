@@ -1,0 +1,6 @@
+DB::table('familia_olfativa')
+->join('f_e', 'f_e.id_familia', '=', 'familia_olfativa.id')
+->join('esencia_perfume', 'esencia_perfume.tscacas', '=', 'f_e.esencia_perfume')
+->where('esencia_perfume.tscacas', '=', $tscacas)
+->select('familia_olfativa.*')
+->paginate(10)
